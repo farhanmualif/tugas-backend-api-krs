@@ -1,0 +1,19 @@
+{
+  "name": "tugas-api-krs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farhanmualif/tugas-backend-api-krs.git"
+  },
+  "author": "farhan mualif",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/farhanmualif/tugas-backend-api-krs/issues"
+  },
+  "homepage": "https://github.com/farhanmualif/tugas-backend-api-krs#readme"
+}
