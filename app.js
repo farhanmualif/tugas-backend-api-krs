@@ -6,7 +6,7 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.json()); // Middleware untuk parsing request body
+app.use(express.json());
 app.use(router);
 
 app.listen(port, () => {
