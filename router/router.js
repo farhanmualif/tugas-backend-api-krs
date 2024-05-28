@@ -8,6 +8,11 @@ const krsPostValidator = require("../validator/krs-post-validator");
 const makulPostValidator = require("../validator/makul-post-validator");
 const mhsPostValidator = require("../validator/mhs-post-validator");
 
+router.get("/", function (req, res) {
+  res.json({
+    data: "Hello World",
+  });
+});
 router.get("/mhs", MahasiswaController.index);
 router.delete("/mhs/(:id)", MahasiswaController.delete);
 router.get("/mhs/(:id)", MahasiswaController.show);

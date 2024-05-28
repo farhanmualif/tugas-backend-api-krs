@@ -1,18 +1,32 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
+require("dotenv/config");
 
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Moenzel1933*",
-  database: "db_mahasiswa",
-});
+async function connection(params) {
+  try {
+    const conn = mysql.createConnection({
+      host: "mysqldb",
+      user: "root",
+      database: "db_mahasiswa",
+      password: "Moenzel1933*",
+      multipleStatements: true,
+    });
 
-connection.connect((err) => {
-  if (err) {
-    console.error("Error connecting to database: ", err);
-    return;
+    console.log("Connected to database!");
+    return conn;
+  } catch (err) {
+    console.error(
+      `Error connecting to database: 
+        code: ${err.code} \n 
+        message: ${err.message} \n 
+        sqlMessage: ${err.sqlMessage} \n 
+        fatal: ${err.fatal} \n 
+        fieldCount: ${err.fieldCount} \n 
+        sql: ${err.sql} \n 
+        stack: ${err.stack}`
+    );
+    console.log("Failed to connect to mysql on startup - retrying in 5 sec");
+    setTimeout(connectWithRetry, 5000);
   }
-  console.log("Connected to database!");
-});
+}
 
 module.exports = connection;

@@ -3,7 +3,9 @@ const { validationResult } = require("express-validator");
 
 class MahasiswaController {
   static async index(req, res) {
-    connection.query("SELECT * FROM tb_mahasiswa", (err, rows) => {
+    const connect = await connection();
+
+    connect.query("SELECT * FROM tb_mahasiswa", (err, rows) => {
       if (err) {
         console.error("Error executing query: ", err);
         return res.status(500).json({ error: "Internal Server Error" });
@@ -12,7 +14,8 @@ class MahasiswaController {
     });
   }
   static async show(req, res) {
-    connection.query(
+    const connect = await connection();
+    connect.query(
       `SELECT * FROM tb_mahasiswa WHERE id=${req.params.id}`,
       (err, rows) => {
         if (err) {
@@ -43,7 +46,8 @@ class MahasiswaController {
       prodi: req.body.prodi,
       jenis_kelamin: req.body.jenis_kelamin,
     };
-    connection.query(
+    const connect = await connection();
+    connect.query(
       "INSERT INTO tb_mahasiswa SET ?",
       formData,
       function (err, rows) {
@@ -65,7 +69,7 @@ class MahasiswaController {
     );
   }
 
-  static update(req, res) {
+  static async update(req, res) {
     try {
       const errors = validationResult(req);
 
@@ -92,7 +96,8 @@ class MahasiswaController {
       };
 
       // update query
-      connection.query(
+      const connect = await connection();
+      connect.query(
         `UPDATE tb_mahasiswa SET ? WHERE id = ${id}`,
         formData,
         function (err, rows) {
@@ -119,11 +124,12 @@ class MahasiswaController {
       });
     }
   }
-  static delete(req, res) {
+  static async delete(req, res) {
     try {
       let id = req.params.id;
 
-      connection.query(
+      const connect = await connection();
+      connect.query(
         `DELETE FROM tb_mahasiswa WHERE id = ${id}`,
         function (err, rows) {
           //if(err) throw err
